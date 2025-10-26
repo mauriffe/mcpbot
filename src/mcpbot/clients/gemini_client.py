@@ -309,7 +309,7 @@ async def websocket_endpoint(websocket: WebSocket) -> None:
 
                 # Resolve the pending elicitation future (unblocks the tool)
                 if elicitation_state.pending and elicitation_state.future:
-                    if user_response.lower() in ["cancel", "decline"]:
+                    if user_response in ["cancel", "decline"]:
                         # User declined to provide input
                         elicitation_state.future.set_result(ElicitResult(action="decline"))
                     else:
