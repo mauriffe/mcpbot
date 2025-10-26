@@ -1,0 +1,47 @@
+# ------------------------------------
+# 1. Byte-compiled / object files
+# ------------------------------------
+*.pyc
+__pycache__/
+*.so
+*.o
+*.pyd
+.idea/
+.idea
+# ------------------------------------
+# 2. Operating System Files
+# ------------------------------------
+.DS_Store             # macOS
+thumbs.db             # Windows
+desktop.ini           # Windows
+
+# ------------------------------------
+# 3. Environments and Dependencies
+# ------------------------------------
+# Virtual Environment
+venv/
+env/
+.venv/
+.tox/
+
+# Python Packages/Distribution
+dist/
+build/
+*.egg-info
+
+# ------------------------------------
+# 4. Project-Specific Files (Your project structure)
+# ------------------------------------
+
+# Environment Variables (Crucial: DO NOT commit secrets)
+.env
+.env.local
+
+# Logs
+*.log
+
+# ------------------------------------
+# 5. Docker / Build Artifacts
+# ------------------------------------
+# Docker build context files
+.dockerignore

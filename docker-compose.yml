@@ -1,0 +1,35 @@
+services:
+  # This is the name of your service
+  mcpserver:
+    # Build the image from the Dockerfile in the current directory (.)
+    build:
+      context: .
+      dockerfile: server.Dockerfile  # Points to the client's Dockerfile
+    container_name: mcpserver
+    restart: unless-stopped
+    # Load environment variables from the .env file
+    env_file:
+      - .env
+    # Mount volumes
+    # This links folders on your computer (host) to folders inside the container
+    volumes:
+      # Mounts the local './logs' folder to '/usr/src/app/logs' inside the container
+      - ./dock/logs:/usr/src/app/logs
+      # Mounts the local './data' folder to '/usr/src/app/data' inside the container
+      - ./dock/data:/usr/src/app/data
+  # --- Service 2: The Interactive Client ---
+  client:
+    build:
+      context: .
+      dockerfile: client.Dockerfile  # Points to the client's Dockerfile
+    container_name: gemini-client
+    env_file:
+      - .env  # Share the .env file (for API_KEY, etc.)
+    ports:
+      - "8080:8080"
+    volumes:
+      # Mounts the local './logs' folder to '/usr/src/app/logs' inside the container
+      - ./dock/logs:/usr/src/app/logs
+      # Mounts the local './data' folder to '/usr/src/app/data' inside the container
+      - ./dock/data:/usr/src/app/data
+    # We will run this service manually using 'docker-compose run'

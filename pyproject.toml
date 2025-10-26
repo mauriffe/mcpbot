@@ -1,0 +1,13 @@
+[project]
+name = "mcpbot"
+version = "0.1.0"
+description = "Basic mcp server with a gemini client all in docker"
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi>=0.120.0",
+    "fastmcp>=2.12.5",
+    "google-genai>=1.46.0",
+    "textual>=6.4.0",
+    "uvicorn>=0.38.0",
+    "websockets>=15.0.1",
+]
