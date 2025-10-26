@@ -54,12 +54,17 @@ clean-images:
 .PHONY: setup-and-go
 # Builds all images, starts the server, and then launches the client shell.
 setup-and-go: build start-server start-client
-	@echo "MCP Server and Gemini Client are running."
+	@echo "MCP Server and Gemini Client are running. http://localhost:8080"
 
 .PHONY: clean-all
 # Remove containers and remove images
 clean-all: clean clean-images
 	@echo "Images and containers removed"
+
+.PHONY: rebuild
+# Remove containers and remove images
+rebuild: clean-all setup-and-go
+	@echo "Everything Rebuilt."
 
 .PHONY: help
 # Display available commands.

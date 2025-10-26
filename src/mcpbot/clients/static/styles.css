@@ -57,6 +57,16 @@ body {
     color: #2c3e50;
 }
 
+.warning-banner {
+    background: #fff3cd;
+    color: #856404;
+    padding: 12px 20px;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.4;
+    border-bottom: 1px solid #ffeaa7;
+}
+
 .chat-messages {
     flex: 1;
     overflow-y: auto;

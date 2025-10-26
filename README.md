@@ -113,6 +113,9 @@ make clean-all
 
 # Build and start everything
 make setup-and-go
+
+# Clean all, rebuild and start everything
+make rebuild
 ```
 
 ### Manual Docker Compose Commands

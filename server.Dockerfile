@@ -5,6 +5,11 @@ LABEL authors="mauriffe"
 # This is where your code will live and run
 WORKDIR /usr/src/app
 
+# Install system dependencies (nmap) and clean up
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends nmap net-tools curl && \
+    rm -rf /var/lib/apt/lists/*
+
 # Copy the requirements file first to leverage Docker cache
 COPY requirements.txt ./
 

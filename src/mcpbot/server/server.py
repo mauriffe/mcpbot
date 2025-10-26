@@ -2,6 +2,8 @@ from fastmcp import FastMCP
 from tools.calcul_tools import register_calcul_tools
 from tools.dice_tools import register_dice_tools
 from tools.weather_tools import register_weather_tools
+from tools.nmap_tools import register_nmap_tools
+from tools.ssl_tools import register_ssl_tools
 from fastmcp.utilities.logging import get_logger
 import logging
 import os
@@ -40,6 +42,8 @@ mcpbot = FastMCP(
 register_calcul_tools(mcpbot)
 register_dice_tools(mcpbot)
 register_weather_tools(mcpbot)
+register_nmap_tools(mcpbot)
+register_ssl_tools(mcpbot)
 
 if __name__ == "__main__":
     try:
