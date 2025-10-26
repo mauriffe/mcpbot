@@ -32,27 +32,27 @@ function handleMessage(data) {
     const messagesDiv = document.getElementById('messages');
 
     if (data.type === 'system') {
-        addMessage(data.message, 'system', null);
+        addMessage(data.message, 'system', null, false);
     } else if (data.type === 'user') {
-        addMessage(data.message, 'user', 'You');
+        addMessage(data.message, 'user', 'You', false);
     } else if (data.type === 'assistant') {
         // Remove thinking indicator
         const thinking = messagesDiv.querySelector('.thinking');
         if (thinking) thinking.remove();
 
-        addMessage(data.message, 'assistant', 'Gemini');
+        addMessage(data.message, 'assistant', 'Gemini', true);
     } else if (data.type === 'thinking') {
-        addMessage(data.message, 'thinking', null);
+        addMessage(data.message, 'thinking', null, false);
     } else if (data.type === 'elicitation') {
         isElicitationPending = true;
-        addMessage('⚠️ ' + data.message, 'elicitation', 'Server');
+        addMessage('⚠️ ' + data.message, 'elicitation', 'Server', false);
         document.getElementById('messageInput').placeholder = 'Type your response... (or type "cancel")';
     } else if (data.type === 'error') {
-        addMessage('Error: ' + data.message, 'system', null);
+        addMessage('Error: ' + data.message, 'system', null, false);
     }
 }
 
-function addMessage(text, className, sender) {
+function addMessage(text, className, sender, useMarkdown) {
     const messagesDiv = document.getElementById('messages');
     const messageDiv = document.createElement('div');
     messageDiv.className = `message ${className}`;
@@ -82,13 +82,23 @@ function addMessage(text, className, sender) {
 
         const contentDiv = document.createElement('div');
         contentDiv.className = 'message-content';
-        contentDiv.textContent = text;
+
+        if (useMarkdown) {
+            // Render markdown content
+            contentDiv.innerHTML = marked.parse(text);
+        } else {
+            contentDiv.textContent = text;
+        }
 
         messageDiv.appendChild(headerDiv);
         messageDiv.appendChild(contentDiv);
     } else {
         // For system messages without sender
-        messageDiv.textContent = text;
+        if (useMarkdown) {
+            messageDiv.innerHTML = marked.parse(text);
+        } else {
+            messageDiv.textContent = text;
+        }
     }
 
     messagesDiv.appendChild(messageDiv);
@@ -130,7 +140,7 @@ document.getElementById('resetButton').addEventListener('click', () => {
         }));
 
         // Add confirmation message
-        addMessage('Chat has been reset', 'system');
+        addMessage('Chat has been reset', 'system', null, false);
     }
 });
 

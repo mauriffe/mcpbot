@@ -26,7 +26,7 @@ services:
     env_file:
       - .env  # Share the .env file (for API_KEY, etc.)
     ports:
-      - "8080:8080"
+      - "127.0.0.1:8080:8080"
     volumes:
       # Mounts the local './logs' folder to '/usr/src/app/logs' inside the container
       - ./dock/logs:/usr/src/app/logs
