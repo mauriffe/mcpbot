@@ -49,6 +49,9 @@ function handleMessage(data) {
         document.getElementById('messageInput').placeholder = 'Type your response... (or type "cancel")';
     } else if (data.type === 'error') {
         addMessage('Error: ' + data.message, 'system', null, false);
+    } else if (data.type === 'tool_log') {
+        // addToolLog(data.message, data.level);
+        addMessage('Tool: ' + data.message, 'system', null, false);
     }
 }
 

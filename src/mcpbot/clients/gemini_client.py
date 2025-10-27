@@ -123,6 +123,7 @@ async def log_handler(message: LogMessage) -> None:
     """
     msg = message.data.get('msg', 'No message')
     extra = message.data.get('extra', 'No extra data')
+    display_in_ui = extra.get('display_in_ui', False)
 
     if message.level == "error":
         logger.error(f"MCP: {msg} | {extra}")
@@ -131,6 +132,16 @@ async def log_handler(message: LogMessage) -> None:
     else:
         logger.info(f"MCP: {msg} | {extra}")
 
+    # Send to WebSocket if display_in_ui is True
+    if display_in_ui and elicitation_state.websocket:
+        try:
+            await elicitation_state.websocket.send_json({
+                "type": "tool_log",
+                "message": msg,
+                "level": message.level
+            })
+        except Exception as e:
+            logger.error(f"Error sending tool log to client: {e}")
 
 async def elicitation_handler(message: str, response_type: type, params: Any, context: Any) -> Any:
     """

@@ -4,6 +4,7 @@ import random
 from enum import Enum
 import string
 import logging
+from .tool_logger import ToolLogger
 
 logger = logging.getLogger(__name__)
 
@@ -40,6 +41,11 @@ def register_dice_tools(mcp):
     async def roll_dice(n_dice: int, ctx: Context) -> dict:
         """Roll `n_dice` 6-sided dice and return the results."""
         try:
+            await ToolLogger.log_to_client(
+                ctx,
+                f"[DICE] 🎲 Starting roll for {n_dice} dice",
+                "info"
+            )
             logger.info(f"[DICE] 🎲 Starting roll for {n_dice} dice")
             logger.info(f"[DICE] Calling ctx.elicit()...")
 

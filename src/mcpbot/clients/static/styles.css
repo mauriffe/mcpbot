@@ -325,3 +325,40 @@ body {
     background: #f5f5f5;
     font-weight: 600;
 }
+
+.tool-log {
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    max-width: 90%;
+    text-align: left;
+}
+
+.tool-log-info {
+    background: #e3f2fd;
+    color: #1565c0;
+    border: 1px solid #90caf9;
+}
+
+.tool-log-success {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #81c784;
+}
+
+.tool-log-warning {
+    background: #fff3e0;
+    color: #e65100;
+    border: 1px solid #ffb74d;
+}
+
+.tool-log-error {
+    background: #ffebee;
+    color: #c62828;
+    border: 1px solid #e57373;
+}
+
+.tool-log-debug {
+    background: #f3e5f5;
+    color: #6a1b9a;
+    border: 1px solid #ba68c8;
+}
