@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP Chat Client</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="icon" href="/static/favicon.png" type="image/png">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <div class="chat-title">MCP Chat Client</div>
+            <button id="resetButton">🔄 Reset</button>
+        </div>
+        <div class="warning-banner">
+            ⚠️ AI-generated output may contain errors. Please verify all information before use. You are responsible for any actions performed based on this content.
+        </div>
+        <div id="status" class="status">Connecting...</div>
+        <div class="chat-messages" id="messages"></div>
+        <div class="chat-input-container">
+            <input type="text" id="messageInput" placeholder="Type your message..." disabled>
+            <button id="sendButton" disabled>Send</button>
+        </div>
+    </div>
+    
+    <!-- Add ECharts library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/6.0.0/echarts.min.js" integrity="sha512-4/g9GAdOdTpUP2mKClpKsEzaK7FQNgMjq+No0rX8XZlfrCGtbi4r+T/p5fnacsEC3zIAmHKLJUL7sh3/yVA4OQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Add Marked.js library for markdown parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/16.3.0/lib/marked.umd.min.js" integrity="sha512-V6rGY7jjOEUc7q5Ews8mMlretz1Vn2wLdMW/qgABLWunzsLfluM0FwHuGjGQ1lc8jO5vGpGIGFE+rTzB+63HdA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/static/app.js"></script>
+</body>
+</html>

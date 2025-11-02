@@ -1,0 +1,1642 @@
+# Extended ECharts Tools - Complete Guide
+
+## New Chart Types Added
+
+I've added **6 additional chart types** to give you more visualization options:
+
+1. **Area Chart** - For cumulative trends
+2. **Gauge Chart** - For KPIs and progress
+3. **Radar Chart** - For multi-dimensional comparisons
+4. **Heatmap** - For intensity patterns
+5. **Funnel Chart** - For conversion flows
+6. **Box Plot** - For statistical distributions
+
+---
+
+## 1. Area Chart (`generate_area_chart`)
+
+### Best For:
+- Traffic sources over time
+- Revenue streams
+- Resource allocation
+- Cumulative metrics
+
+### Parameters:
+- `title` - Chart title
+- `categories` - X-axis labels (e.g., time periods)
+- `series_names` - Names of each data series
+- `series_data` - 2D array of values
+- `stacked` - Whether to stack areas (default: true)
+
+### Example Usage:
+```
+User: "Show website traffic sources for the past 6 months"
+
+Gemini calls:
+generate_area_chart(
+    title="Website Traffic Sources",
+    categories=["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+    series_names=["Direct", "Search", "Social", "Referral"],
+    series_data=[
+        [1200, 1350, 1100, 1500, 1800, 2000],
+        [800, 950, 900, 1100, 1200, 1400],
+        [500, 600, 550, 700, 850, 900],
+        [300, 350, 400, 450, 500, 550]
+    ],
+    stacked=true
+)
+```
+
+---
+
+## 2. Gauge Chart (`generate_gauge_chart`)
+
+### Best For:
+- KPI dashboards
+- Progress indicators
+- Performance metrics
+- Target achievement
+- Completion rates
+
+### Parameters:
+- `title` - Metric name
+- `value` - Current value
+- `min_value` - Minimum (default: 0)
+- `max_value` - Maximum (default: 100)
+- `unit` - Unit symbol (e.g., "%", "°C")
+
+### Example Usage:
+```
+User: "Show our project completion rate at 78.5%"
+
+Gemini calls:
+generate_gauge_chart(
+    title="Project Completion",
+    value=78.5,
+    min_value=0,
+    max_value=100,
+    unit="%"
+)
+```
+
+```
+User: "Display CPU temperature at 65 degrees Celsius"
+
+Gemini calls:
+generate_gauge_chart(
+    title="CPU Temperature",
+    value=65,
+    min_value=0,
+    max_value=100,
+    unit="°C"
+)
+```
+
+---
+
+## 3. Radar Chart (`generate_radar_chart`)
+
+### Best For:
+- Skill assessments
+- Product comparisons
+- Performance reviews
+- Multi-factor analysis
+- Team/player comparisons
+
+### Parameters:
+- `title` - Chart title
+- `indicators` - Dimension names
+- `series_names` - Entity names to compare
+- `series_data` - Values for each entity
+- `max_values` - Optional max for each dimension
+
+### Example Usage:
+```
+User: "Compare two products across 5 features"
+
+Gemini calls:
+generate_radar_chart(
+    title="Product Comparison",
+    indicators=["Performance", "Price", "Quality", "Support", "Features"],
+    series_names=["Product A", "Product B"],
+    series_data=[
+        [85, 70, 90, 75, 80],
+        [75, 85, 80, 90, 85]
+    ]
+)
+```
+
+```
+User: "Show employee skill assessment"
+
+Gemini calls:
+generate_radar_chart(
+    title="Employee Skills",
+    indicators=["Communication", "Technical", "Leadership", "Creativity", "Teamwork"],
+    series_names=["John", "Sarah"],
+    series_data=[
+        [90, 75, 80, 70, 85],
+        [85, 90, 75, 80, 90]
+    ]
+)
+```
+
+---
+
+## 4. Heatmap (`generate_heatmap`)
+
+### Best For:
+- Activity patterns
+- Correlation matrices
+- Time-based intensity
+- Geographic data
+- Attendance tracking
+
+### Parameters:
+- `title` - Chart title
+- `x_labels` - Column labels
+- `y_labels` - Row labels
+- `data` - 2D array [row][column]
+- `color_scheme` - "blues", "reds", "greens", "purples"
+
+### Example Usage:
+```
+User: "Show weekly activity heatmap"
+
+Gemini calls:
+generate_heatmap(
+    title="Weekly Activity Levels",
+    x_labels=["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    y_labels=["Morning", "Afternoon", "Evening", "Night"],
+    data=[
+        [5, 8, 12, 15, 10, 3, 2],
+        [15, 20, 25, 28, 22, 8, 5],
+        [12, 15, 18, 20, 18, 15, 10],
+        [2, 3, 5, 8, 10, 12, 8]
+    ],
+    color_scheme="blues"
+)
+```
+
+```
+User: "Display server load by hour and day"
+
+Gemini calls:
+generate_heatmap(
+    title="Server Load Pattern",
+    x_labels=["00:00", "04:00", "08:00", "12:00", "16:00", "20:00"],
+    y_labels=["Mon", "Tue", "Wed", "Thu", "Fri"],
+    data=[
+        [20, 15, 45, 80, 85, 60],
+        [18, 12, 50, 85, 90, 65],
+        [22, 18, 55, 90, 88, 70],
+        [25, 20, 52, 88, 92, 68],
+        [30, 25, 60, 95, 85, 50]
+    ],
+    color_scheme="reds"
+)
+```
+
+---
+
+## 5. Funnel Chart (`generate_funnel_chart`)
+
+### Best For:
+- Sales funnels
+- Conversion rates
+- Application processes
+- User journeys
+- Drop-off analysis
+
+### Parameters:
+- `title` - Chart title
+- `labels` - Stage names
+- `values` - Count at each stage
+- `show_percentages` - Show conversion % (default: true)
+
+### Example Usage:
+```
+User: "Show our sales funnel"
+
+Gemini calls:
+generate_funnel_chart(
+    title="Sales Funnel Q4 2024",
+    labels=["Website Visits", "Sign Ups", "Free Trial", "Demo Request", "Purchase"],
+    values=[50000, 12000, 4500, 1200, 450],
+    show_percentages=true
+)
+```
+
+```
+User: "Display application process conversion"
+
+Gemini calls:
+generate_funnel_chart(
+    title="Application Process",
+    labels=["Started", "Profile Complete", "Documents Submitted", "Interview", "Accepted"],
+    values=[1000, 650, 420, 180, 85]
+)
+```
+
+---
+
+## 6. Box Plot (`generate_box_plot`)
+
+### Best For:
+- Statistical distributions
+- Outlier detection
+- Comparing groups
+- Quality control
+- Test score analysis
+
+### Parameters:
+- `title` - Chart title
+- `categories` - Group names
+- `data` - Array of [min, Q1, median, Q3, max] for each group
+- `y_axis_label` - Y-axis label
+
+### Example Usage:
+```
+User: "Show test score distribution across three classes"
+
+Gemini calls:
+generate_box_plot(
+    title="Test Score Distribution",
+    categories=["Class A", "Class B", "Class C"],
+    data=[
+        [45, 65, 75, 85, 98],
+        [50, 68, 78, 88, 95],
+        [40, 62, 72, 82, 96]
+    ],
+    y_axis_label="Score"
+)
+```
+
+**Note:** Box plot data format is `[min, Q1, median, Q3, max]` where:
+- min = minimum value
+- Q1 = 25th percentile
+- median = 50th percentile (middle value)
+- Q3 = 75th percentile
+- max = maximum value
+
+---
+
+## Complete Chart Type Summary
+
+| Chart Type | Best For | Complexity | Use Case |
+|-----------|----------|------------|----------|
+| **Line** | Trends over time | ⭐ | Stock prices, temperature |
+| **Bar** | Comparisons | ⭐ | Sales by region, rankings |
+| **Pie** | Proportions | ⭐ | Market share, budget breakdown |
+| **Scatter** | Correlations | ⭐⭐ | Study hours vs scores |
+| **Multi-Series** | Multiple datasets | ⭐⭐ | Revenue vs expenses |
+| **Area** | Cumulative trends | ⭐⭐ | Traffic sources, resource usage |
+| **Gauge** | Single metrics | ⭐ | KPIs, progress, completion |
+| **Radar** | Multi-dimensional | ⭐⭐⭐ | Skills, product comparison |
+| **Heatmap** | Intensity patterns | ⭐⭐⭐ | Activity levels, correlations |
+| **Funnel** | Process flows | ⭐⭐ | Sales funnel, conversions |
+| **Box Plot** | Statistical | ⭐⭐⭐ | Distributions, outliers |
+
+---
+
+## Example Prompts for Each Chart
+
+### Area Chart
+- "Show traffic sources stacked over 6 months"
+- "Display cumulative revenue by product line"
+- "Chart resource allocation over time"
+
+### Gauge Chart
+- "Show customer satisfaction at 87%"
+- "Display current CPU usage at 45%"
+- "Show project progress at 62.5%"
+
+### Radar Chart
+- "Compare candidate skills across 5 dimensions"
+- "Show product features: A vs B vs C"
+- "Display team performance metrics"
+
+### Heatmap
+- "Show GitHub contribution pattern"
+- "Display hourly website traffic by day"
+- "Chart correlation matrix for variables"
+
+### Funnel Chart
+- "Show conversion funnel from visit to purchase"
+- "Display application process drop-off"
+- "Chart lead qualification stages"
+
+### Box Plot
+- "Compare salary distribution by department"
+- "Show test scores across different schools"
+- "Display response time statistics by server"
+
+---
+
+## Tips for Best Results
+
+### 1. Choose the Right Chart
+- **Time series?** → Line or Area
+- **Comparison?** → Bar or Radar
+- **Proportion?** → Pie or Funnel
+- **Distribution?** → Box Plot or Heatmap
+- **Single metric?** → Gauge
+- **Correlation?** → Scatter or Heatmap
+
+### 2. Provide Context
+✅ "Show sales funnel with these stages..."
+✅ "Create a radar chart comparing..."
+❌ "Make a chart"
+
+### 3. Include Data When Possible
+✅ "Show gauge at 75% completion"
+✅ "Heatmap with 4 rows and 7 columns..."
+❌ "Show some data in a gauge"
+
+### 4. Specify Visual Preferences
+- "stacked area chart"
+- "horizontal bar chart"
+- "donut pie chart"
+- "blue color scheme heatmap"
+
+---
+
+## Color Schemes
+
+### Heatmap Color Options:
+- **blues** - Cool, professional (default)
+- **reds** - Warm, attention-grabbing
+- **greens** - Natural, positive
+- **purples** - Creative, modern
+
+### Default Colors for Multi-Series:
+1. Blue (#3498db)
+2. Red (#e74c3c)
+3. Green (#2ecc71)
+4. Orange (#f39c12)
+5. Purple (#9b59b6)
+6. Turquoise (#1abc9c)
+
+---
+
+## Troubleshooting
+
+### Gauge Not Showing
+- Ensure value is between min_value and max_value
+- Check that value is a number, not a string
+
+### Radar Chart Issues
+- All series_data arrays must have same length as indicators
+- Values should be numeric
+
+### Heatmap Not Rendering
+- Ensure data is 2D array: `[[row1], [row2]]`
+- Check that data length matches y_labels length
+- Each row length should match x_labels length
+
+### Box Plot Problems
+- Data must be in format: `[min, Q1, median, Q3, max]`
+- Values should be in ascending order
+- All 5 values required for each box
+
+---
+
+## Total Available Chart Types
+
+You now have **11 chart generation tools**:
+
+1. ✅ Line Chart
+2. ✅ Bar Chart
+3. ✅ Pie Chart
+4. ✅ Scatter Plot
+5. ✅ Multi-Series Chart
+6. ✅ Area Chart
+7. ✅ Gauge Chart
+8. ✅ Radar Chart
+9. ✅ Heatmap
+10. ✅ Funnel Chart
+11. ✅ Box Plot
+
+Plus the base `display_chart` tool for custom configurations
+
+
+# ECharts Integration Examples
+
+## Overview
+The `display_chart` tool allows Gemini to create interactive Apache ECharts visualizations directly in the chat interface. The AI can now respond to requests like "show me a chart of..." by calling this tool.
+
+## How It Works
+
+1. **User Request**: User asks for a visualization (e.g., "create a bar chart showing sales data")
+2. **AI Processing**: Gemini processes the request and calls the `display_chart` tool
+3. **Chart Rendering**: The frontend receives the chart configuration and renders it using Apache ECharts
+4. **Interactive Display**: User can interact with the chart (hover, zoom, etc.)
+
+## Tool Parameters
+
+```python
+display_chart(
+    chart_config: dict,      # ECharts option object (required)
+    title: str = "Chart",    # Chart title (optional)
+    description: str = "",   # Chart description (optional)
+)
+```
+
+## Example Prompts for Users
+
+### Line Chart
+```
+"Create a line chart showing temperature trends over a week: Mon(20°C), Tue(22°C), Wed(25°C), Thu(23°C), Fri(21°C), Sat(19°C), Sun(20°C)"
+```
+
+### Bar Chart
+```
+"Show me a bar chart comparing quarterly sales: Q1: $45k, Q2: $62k, Q3: $58k, Q4: $71k"
+```
+
+### Pie Chart
+```
+"Create a pie chart showing market share: Company A: 35%, Company B: 28%, Company C: 22%, Others: 15%"
+```
+
+### Multi-series Chart
+```
+"Display a multi-line chart comparing revenue vs expenses for 6 months"
+```
+
+### Scatter Plot
+```
+"Create a scatter plot showing the relationship between study hours and test scores"
+```
+
+## Example Chart Configurations
+
+### Simple Line Chart
+```json
+{
+  "title": { "text": "Temperature Trend" },
+  "tooltip": { "trigger": "axis" },
+  "xAxis": {
+    "type": "category",
+    "data": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+  },
+  "yAxis": { "type": "value" },
+  "series": [{
+    "name": "Temperature",
+    "type": "line",
+    "data": [20, 22, 25, 23, 21, 19, 20],
+    "smooth": true
+  }]
+}
+```
+
+### Bar Chart
+```json
+{
+  "title": { "text": "Quarterly Sales" },
+  "tooltip": {},
+  "xAxis": {
+    "type": "category",
+    "data": ["Q1", "Q2", "Q3", "Q4"]
+  },
+  "yAxis": { "type": "value" },
+  "series": [{
+    "name": "Sales",
+    "type": "bar",
+    "data": [45000, 62000, 58000, 71000],
+    "itemStyle": { "color": "#3498db" }
+  }]
+}
+```
+
+### Pie Chart
+```json
+{
+  "title": { "text": "Market Share" },
+  "tooltip": { "trigger": "item" },
+  "legend": { "orient": "vertical", "left": "left" },
+  "series": [{
+    "name": "Share",
+    "type": "pie",
+    "radius": "50%",
+    "data": [
+      { "value": 35, "name": "Company A" },
+      { "value": 28, "name": "Company B" },
+      { "value": 22, "name": "Company C" },
+      { "value": 15, "name": "Others" }
+    ]
+  }]
+}
+```
+
+### Scatter Plot
+```json
+{
+  "title": { "text": "Study Hours vs Test Scores" },
+  "tooltip": { "trigger": "item" },
+  "xAxis": { "name": "Hours Studied" },
+  "yAxis": { "name": "Test Score" },
+  "series": [{
+    "type": "scatter",
+    "data": [[1, 55], [2, 65], [3, 70], [4, 75], [5, 85], [6, 90], [7, 95]]
+  }]
+}
+```
+
+## Advanced Features
+
+### Multiple Series
+```json
+{
+  "title": { "text": "Revenue vs Expenses" },
+  "tooltip": { "trigger": "axis" },
+  "legend": { "data": ["Revenue", "Expenses"] },
+  "xAxis": {
+    "type": "category",
+    "data": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
+  },
+  "yAxis": { "type": "value" },
+  "series": [
+    {
+      "name": "Revenue",
+      "type": "line",
+      "data": [120, 132, 101, 134, 90, 230]
+    },
+    {
+      "name": "Expenses",
+      "type": "line",
+      "data": [80, 90, 85, 95, 70, 150]
+    }
+  ]
+}
+```
+
+### Stacked Area Chart
+```json
+{
+  "title": { "text": "Traffic Sources" },
+  "tooltip": { "trigger": "axis" },
+  "legend": { "data": ["Direct", "Search", "Social"] },
+  "xAxis": {
+    "type": "category",
+    "data": ["Mon", "Tue", "Wed", "Thu", "Fri"]
+  },
+  "yAxis": { "type": "value" },
+  "series": [
+    {
+      "name": "Direct",
+      "type": "line",
+      "stack": "Total",
+      "areaStyle": {},
+      "data": [120, 132, 101, 134, 90]
+    },
+    {
+      "name": "Search",
+      "type": "line",
+      "stack": "Total",
+      "areaStyle": {},
+      "data": [220, 182, 191, 234, 290]
+    },
+    {
+      "name": "Social",
+      "type": "line",
+      "stack": "Total",
+      "areaStyle": {},
+      "data": [150, 232, 201, 154, 190]
+    }
+  ]
+}
+```
+
+## Testing the Feature
+
+### Test Prompt
+```
+"Show me a bar chart with these sales figures:
+January: $45,000
+February: $52,000
+March: $48,000
+April: $61,000
+May: $55,000"
+```
+
+Expected behavior:
+1. Gemini calls the `display_chart` tool
+2. A formatted bar chart appears in the chat
+3. Chart is interactive (hover shows values)
+4. Chart includes proper title and labels
+
+## Implementation Notes
+
+- Charts are rendered client-side using Apache ECharts 5.5.0
+- Each chart gets a unique ID for proper initialization
+- Charts are responsive and resize with the window
+- Chart instances are properly cleaned up on chat reset
+- Charts support all standard ECharts configuration options
+
+## Troubleshooting
+
+### Chart Not Displaying
+- Ensure ECharts CDN is loaded (check browser console)
+- Verify chart_config is valid JSON
+- Check that chart container has proper dimensions
+
+### Chart Configuration Errors
+- Validate against ECharts documentation
+- Ensure required properties (xAxis, yAxis, series) are present
+- Check data format matches chart type
+
+## Resources
+
+- [Apache ECharts Documentation](https://echarts.apache.org/en/option.html)
+- [ECharts Examples Gallery](https://echarts.apache.org/examples/en/index.html)
+- [Chart Types Reference](https://echarts.apache.org/en/tutorial.html#Basic%20Concepts%20Overview)
+
+
+# Advanced ECharts Types - Complete Guide
+
+## 6 Additional Advanced Chart Types
+
+I've added sophisticated visualization tools for complex data scenarios:
+
+1. **Sankey Diagram** - Flow visualization
+2. **Treemap** - Hierarchical rectangles
+3. **Sunburst Chart** - Radial hierarchy
+4. **Candlestick Chart** - Financial data
+5. **Parallel Coordinates** - Multi-dimensional analysis
+6. **Waterfall Chart** - Cumulative changes
+
+---
+
+## 1. Sankey Diagram (`generate_sankey_diagram`)
+
+### Best For:
+- Energy/resource flows
+- Traffic source analysis
+- Budget allocation
+- Supply chain visualization
+- User journey flows
+
+### Parameters:
+- `title` - Chart title
+- `nodes` - List of node names
+- `links` - Connections: `[{"source": "A", "target": "B", "value": 10}, ...]`
+
+### Example Usage:
+```
+User: "Show website traffic flow from sources to pages"
+
+Gemini calls:
+generate_sankey_diagram(
+    title="Website Traffic Flow",
+    nodes=["Google", "Facebook", "Direct", "Homepage", "Products", "Checkout", "Exit"],
+    links=[
+        {"source": "Google", "target": "Homepage", "value": 5000},
+        {"source": "Facebook", "target": "Homepage", "value": 2000},
+        {"source": "Direct", "target": "Homepage", "value": 1000},
+        {"source": "Homepage", "target": "Products", "value": 6000},
+        {"source": "Homepage", "target": "Exit", "value": 2000},
+        {"source": "Products", "target": "Checkout", "value": 1500},
+        {"source": "Products", "target": "Exit", "value": 4500}
+    ]
+)
+```
+
+**Use Cases:**
+- Website analytics (source → page → action)
+- Energy consumption (source → usage → waste)
+- Budget flow (department → project → expense)
+- Supply chain (supplier → warehouse → customer)
+
+---
+
+## 2. Treemap (`generate_treemap`)
+
+### Best For:
+- Disk space usage
+- Portfolio composition
+- Budget breakdown by category
+- Market share with subcategories
+- Organizational structure
+
+### Parameters:
+- `title` - Chart title
+- `data` - Hierarchical structure with children
+
+### Example Usage:
+```
+User: "Show disk usage by file type"
+
+Gemini calls:
+generate_treemap(
+    title="Disk Space Usage (GB)",
+    data=[
+        {
+            "name": "Documents",
+            "value": 500,
+            "children": [
+                {"name": "PDFs", "value": 300},
+                {"name": "Word", "value": 150},
+                {"name": "Excel", "value": 50}
+            ]
+        },
+        {
+            "name": "Media",
+            "value": 2500,
+            "children": [
+                {"name": "Photos", "value": 1200},
+                {"name": "Videos", "value": 1000},
+                {"name": "Music", "value": 300}
+            ]
+        },
+        {
+            "name": "Software",
+            "value": 800,
+            "children": [
+                {"name": "Applications", "value": 600},
+                {"name": "Games", "value": 200}
+            ]
+        }
+    ]
+)
+```
+
+**Use Cases:**
+- File system visualization
+- Budget by department and project
+- Investment portfolio breakdown
+- Sales by region and product
+- Code repository size analysis
+
+---
+
+## 3. Sunburst Chart (`generate_sunburst_chart`)
+
+### Best For:
+- Organizational hierarchy
+- File system structure
+- Category taxonomy
+- Multi-level breakdowns
+- Family trees
+
+### Parameters:
+- `title` - Chart title
+- `data` - Hierarchical structure (similar to treemap)
+
+### Example Usage:
+```
+User: "Show company organization structure"
+
+Gemini calls:
+generate_sunburst_chart(
+    title="Company Organization",
+    data=[
+        {
+            "name": "Company",
+            "children": [
+                {
+                    "name": "Engineering",
+                    "value": 120,
+                    "children": [
+                        {"name": "Frontend", "value": 45},
+                        {"name": "Backend", "value": 50},
+                        {"name": "DevOps", "value": 25}
+                    ]
+                },
+                {
+                    "name": "Sales",
+                    "value": 80,
+                    "children": [
+                        {"name": "Direct Sales", "value": 40},
+                        {"name": "Partners", "value": 25},
+                        {"name": "Online", "value": 15}
+                    ]
+                },
+                {
+                    "name": "Marketing",
+                    "value": 50,
+                    "children": [
+                        {"name": "Digital", "value": 30},
+                        {"name": "Content", "value": 20}
+                    ]
+                }
+            ]
+        }
+    ]
+)
+```
+
+**Comparison with Treemap:**
+- **Treemap**: Better for comparing sizes, rectangular layout
+- **Sunburst**: Better for showing hierarchy depth, radial/circular layout
+
+---
+
+## 4. Candlestick Chart (`generate_candlestick_chart`)
+
+### Best For:
+- Stock prices
+- Cryptocurrency trading
+- Commodity prices
+- Any OHLC (Open-High-Low-Close) data
+
+### Parameters:
+- `title` - Chart title
+- `dates` - Time period labels
+- `data` - List of `[open, close, low, high]` for each period
+
+### Example Usage:
+```
+User: "Show stock price movement for Q1"
+
+Gemini calls:
+generate_candlestick_chart(
+    title="AAPL Stock Price - Q1 2024",
+    dates=["Jan", "Feb", "Mar"],
+    data=[
+        [150, 165, 148, 170],  # [open, close, low, high]
+        [165, 158, 155, 172],
+        [158, 175, 157, 180]
+    ],
+    y_axis_label="Price ($)"
+)
+```
+
+**Reading Candlesticks:**
+- **Green candle**: Close > Open (price increased)
+- **Red candle**: Close < Open (price decreased)
+- **Wick (line)**: Shows high and low range
+- **Body**: Shows open and close range
+
+---
+
+## 5. Parallel Coordinates (`generate_parallel_coordinates`)
+
+### Best For:
+- Multi-dimensional comparisons
+- Product feature analysis
+- Quality control metrics
+- Scientific data analysis
+- Filter and explore relationships
+
+### Parameters:
+- `title` - Chart title
+- `dimensions` - Variable names
+- `data` - Matrix of values (each row is one item)
+
+### Example Usage:
+```
+User: "Compare cars across multiple features"
+
+Gemini calls:
+generate_parallel_coordinates(
+    title="Car Comparison Analysis",
+    dimensions=["Price ($)", "MPG", "Horsepower", "Safety Rating", "Comfort Score"],
+    data=[
+        [25000, 32, 180, 9, 8],   # Car 1
+        [35000, 28, 250, 10, 9],  # Car 2
+        [20000, 38, 150, 8, 7],   # Car 3
+        [45000, 25, 350, 9, 10],  # Car 4
+        [30000, 30, 200, 9, 8]    # Car 5
+    ]
+)
+```
+
+**How to Read:**
+- Each vertical axis represents one dimension
+- Each line represents one data point (item)
+- Lines crossing show relationships between variables
+- Parallel lines indicate correlation
+
+---
+
+## 6. Waterfall Chart (`generate_waterfall_chart`)
+
+### Best For:
+- Income statements
+- Budget changes
+- Inventory tracking
+- Cumulative impact analysis
+- Before/after comparisons
+
+### Parameters:
+- `title` - Chart title
+- `labels` - Step names
+- `values` - Changes (positive or negative)
+
+### Example Usage:
+```
+User: "Show profit and loss breakdown"
+
+Gemini calls:
+generate_waterfall_chart(
+    title="P&L Statement - Q4 2024",
+    labels=["Revenue", "COGS", "Marketing", "Operations", "R&D", "Taxes", "Net Profit"],
+    values=[500000, -200000, -80000, -60000, -40000, -30000, 90000],
+    y_axis_label="Amount ($)"
+)
+```
+
+**Interpretation:**
+- **Starting point**: First value (usually revenue/starting balance)
+- **Green bars**: Additions/increases
+- **Red bars**: Deductions/decreases
+- **Final bar**: Net result (often shown in blue)
+
+**Use Cases:**
+- Financial statements
+- Year-over-year change analysis
+- Inventory movement (received - sold = current)
+- Project budget tracking
+
+---
+
+## Complete Chart Arsenal
+
+### You now have **17 chart types!**
+
+#### Basic (5):
+1. Line Chart
+2. Bar Chart
+3. Pie Chart
+4. Scatter Plot
+5. Multi-Series Chart
+
+#### Intermediate (6):
+6. Area Chart
+7. Gauge Chart
+8. Radar Chart
+9. Heatmap
+10. Funnel Chart
+11. Box Plot
+
+#### Advanced (6):
+12. Sankey Diagram
+13. Treemap
+14. Sunburst Chart
+15. Candlestick Chart
+16. Parallel Coordinates
+17. Waterfall Chart
+
+---
+
+## Chart Selection Guide
+
+### By Data Type:
+
+**Time Series Data:**
+- Line, Area, Candlestick
+
+**Categorical Comparison:**
+- Bar, Radar, Parallel Coordinates
+
+**Proportions:**
+- Pie, Funnel, Treemap, Sunburst
+
+**Distribution:**
+- Box Plot, Heatmap
+
+**Relationships:**
+- Scatter, Sankey, Parallel Coordinates
+
+**Hierarchical:**
+- Treemap, Sunburst
+
+**Financial:**
+- Candlestick, Waterfall
+
+**Progress/KPIs:**
+- Gauge, Funnel
+
+**Flows:**
+- Sankey
+
+---
+
+## Example Prompts
+
+### Sankey
+- "Show energy flow from source to usage"
+- "Visualize user journey from landing to conversion"
+- "Display budget allocation across departments"
+
+### Treemap
+- "Show portfolio allocation by asset class and holdings"
+- "Visualize disk space usage by folder"
+- "Display sales by region, country, and product"
+
+### Sunburst
+- "Show organizational structure from CEO down"
+- "Visualize website navigation hierarchy"
+- "Display product category taxonomy"
+
+### Candlestick
+- "Show Bitcoin price for last 30 days"
+- "Display stock OHLC data for the quarter"
+- "Chart commodity price movements"
+
+### Parallel Coordinates
+- "Compare 5 smartphones across 7 features"
+- "Analyze student performance across subjects"
+- "Compare server metrics across instances"
+
+### Waterfall
+- "Show how we got from gross to net profit"
+- "Display inventory changes throughout the month"
+- "Chart budget variance from plan to actual"
+
+---
+
+## Tips for Complex Charts
+
+### Sankey Diagram:
+- Ensure all source/target names exist in nodes list
+- Use descriptive node names
+- Values should represent flow magnitude
+
+### Treemap/Sunburst:
+- Structure data with clear parent-child relationships
+- Use `value` for leaf nodes (no children)
+- Can nest up to 3-4 levels deep
+
+### Candlestick:
+- Data format: `[open, close, low, high]`
+- Ensure `low ≤ open,close ≤ high`
+- Use consistent time periods
+
+### Parallel Coordinates:
+- Best with 3-7 dimensions
+- Normalize scales if values differ greatly
+- Each row should have same number of values
+
+### Waterfall:
+- Last value often represents total/net
+- Positive values = increases (green)
+- Negative values = decreases (red)
+
+---
+
+## Common Mistakes to Avoid
+
+### Sankey:
+❌ Node names in links don't match nodes list
+❌ Circular flows (A→B→A)
+✅ Clear, linear flows
+
+### Treemap/Sunburst:
+❌ Missing value for leaf nodes
+❌ Too many levels (>4)
+✅ 2-3 level hierarchies work best
+
+### Candlestick:
+❌ Wrong order: should be [open, close, low, high]
+❌ Low > High or values outside range
+✅ Validate OHLC relationships
+
+### Parallel Coordinates:
+❌ Different number of values per row
+❌ Too many dimensions (>10)
+✅ 3-7 dimensions optimal
+
+### Waterfall:
+❌ Forgetting to make decreases negative
+❌ Last value not representing total
+✅ Clear progression from start to end
+
+---
+
+## Performance Considerations
+
+**Light** (<100 data points):
+- All chart types perform well
+
+**Medium** (100-1,000 points):
+- Sankey, Treemap, Sunburst - Good
+- Parallel Coordinates - May slow down
+- Others - Good
+
+**Heavy** (>1,000 points):
+- Consider: Line, Heatmap
+- Avoid: Parallel Coordinates with many dimensions
+- Aggregate data when possible
+
+---
+
+## Accessibility Notes
+
+**Color-blind friendly:**
+- Candlestick: Uses green/red (consider blue/orange alternative)
+- Waterfall: Uses green/red (built-in)
+- Heatmap: Choose appropriate color scheme
+
+**Best for presentations:**
+- Sankey (impressive, clear flows)
+- Sunburst (beautiful, hierarchical)
+- Gauge (simple, impactful)
+- Waterfall (clear story)
+
+**Best for analysis:**
+- Parallel Coordinates (explore patterns)
+- Box Plot (statistical rigor)
+- Heatmap (spot patterns)
+- Treemap (compare magnitudes)
+
+
+
+# Customer Support & Feedback Analysis Charts
+
+## 5 Specialized Charts for Customer Support
+
+Perfect for analyzing tickets, feedback, sentiment, and support performance:
+
+1. **Word Cloud** - Keyword frequency from feedback
+2. **Stacked Bar Chart** - Composition analysis
+3. **Timeline Chart** - Ticket lifecycle tracking
+4. **Sentiment Gauge Grid** - Multiple sentiment scores
+5. **Trend Comparison** - Period-over-period analysis
+
+---
+
+## 1. Word Cloud (`generate_word_cloud`)
+
+### Best For:
+- Customer feedback keywords
+- Common complaint topics
+- Feature request analysis
+- Support ticket categorization
+- Survey open-ended responses
+
+### Parameters:
+- `title` - Chart title
+- `words` - List of `{"name": "word", "value": frequency}`
+- `shape` - "circle", "cardioid", "diamond", "square"
+
+### Use Cases:
+
+#### Customer Feedback Analysis
+```
+User: "Show most common words in customer feedback"
+
+Gemini calls:
+generate_word_cloud(
+    title="Customer Feedback - Top Keywords",
+    words=[
+        {"name": "excellent", "value": 245},
+        {"name": "responsive", "value": 198},
+        {"name": "helpful", "value": 176},
+        {"name": "quick", "value": 165},
+        {"name": "professional", "value": 142},
+        {"name": "friendly", "value": 138},
+        {"name": "knowledgeable", "value": 125},
+        {"name": "slow", "value": 89},
+        {"name": "confusing", "value": 67},
+        {"name": "frustrated", "value": 54}
+    ]
+)
+```
+
+#### Support Ticket Topics
+```
+User: "Analyze support ticket keywords from last month"
+
+Gemini calls:
+generate_word_cloud(
+    title="Support Ticket Topics - May 2024",
+    words=[
+        {"name": "password", "value": 312},
+        {"name": "login", "value": 289},
+        {"name": "billing", "value": 245},
+        {"name": "refund", "value": 198},
+        {"name": "feature", "value": 167},
+        {"name": "bug", "value": 145},
+        {"name": "performance", "value": 123},
+        {"name": "integration", "value": 98},
+        {"name": "setup", "value": 87},
+        {"name": "upgrade", "value": 76}
+    ]
+)
+```
+
+#### Feature Requests
+```
+generate_word_cloud(
+    title="Most Requested Features",
+    words=[
+        {"name": "mobile-app", "value": 456},
+        {"name": "api", "value": 378},
+        {"name": "dark-mode", "value": 334},
+        {"name": "export", "value": 298},
+        {"name": "notifications", "value": 267}
+    ]
+)
+```
+
+---
+
+## 2. Stacked Bar Chart (`generate_stacked_bar_chart`)
+
+### Best For:
+- Ticket status by priority
+- Sentiment by product/category
+- Resolution time distribution
+- Channel performance breakdown
+- Team workload analysis
+
+### Parameters:
+- `title` - Chart title
+- `categories` - Main categories
+- `series_names` - Segment names
+- `series_data` - Data for each segment
+- `horizontal` - Vertical or horizontal bars
+- `show_percentages` - Show values on bars
+
+### Use Cases:
+
+#### Ticket Status by Priority
+```
+User: "Show ticket status breakdown by priority"
+
+Gemini calls:
+generate_stacked_bar_chart(
+    title="Support Tickets by Priority and Status",
+    categories=["Critical", "High", "Medium", "Low"],
+    series_names=["Open", "In Progress", "Awaiting Customer", "Resolved"],
+    series_data=[
+        [12, 8, 5, 2],      # Open
+        [25, 18, 15, 8],    # In Progress
+        [8, 12, 20, 15],    # Awaiting Customer
+        [15, 45, 85, 150]   # Resolved
+    ],
+    horizontal=True
+)
+```
+
+#### Sentiment by Product
+```
+User: "Analyze sentiment distribution across our products"
+
+Gemini calls:
+generate_stacked_bar_chart(
+    title="Customer Sentiment by Product",
+    categories=["Product A", "Product B", "Product C", "Product D"],
+    series_names=["Positive", "Neutral", "Negative"],
+    series_data=[
+        [450, 380, 290, 510],  # Positive
+        [180, 220, 190, 160],  # Neutral
+        [70, 100, 120, 80]     # Negative
+    ],
+    show_percentages=False
+)
+```
+
+#### Response Time by Channel
+```
+generate_stacked_bar_chart(
+    title="Response Time Distribution by Channel",
+    categories=["Email", "Chat", "Phone", "Social"],
+    series_names=["<1 hour", "1-4 hours", "4-24 hours", ">24 hours"],
+    series_data=[
+        [50, 180, 220, 100],   # <1 hour
+        [120, 250, 180, 150],  # 1-4 hours
+        [200, 120, 80, 120],   # 4-24 hours
+        [80, 50, 20, 80]       # >24 hours
+    ]
+)
+```
+
+---
+
+## 3. Timeline Chart (`generate_timeline_chart`)
+
+### Best For:
+- Ticket lifecycle visualization
+- Case duration tracking
+- SLA compliance monitoring
+- Incident timelines
+- Agent workload timelines
+
+### Parameters:
+- `title` - Chart title
+- `categories` - Ticket/case IDs
+- `events` - List of time periods with start/end
+
+### Use Cases:
+
+#### Ticket Lifecycle
+```
+User: "Show ticket lifecycle for top 5 cases"
+
+Gemini calls:
+generate_timeline_chart(
+    title="Support Ticket Lifecycle - Top 5",
+    categories=["TICK-1001", "TICK-1002", "TICK-1003", "TICK-1004", "TICK-1005"],
+    events=[
+        {"category": "TICK-1001", "start": 0, "end": 2, "name": "Open", "color": "#e74c3c"},
+        {"category": "TICK-1001", "start": 2, "end": 12, "name": "In Progress", "color": "#f39c12"},
+        {"category": "TICK-1001", "start": 12, "end": 15, "name": "Resolved", "color": "#2ecc71"},
+
+        {"category": "TICK-1002", "start": 1, "end": 3, "name": "Open", "color": "#e74c3c"},
+        {"category": "TICK-1002", "start": 3, "end": 8, "name": "In Progress", "color": "#f39c12"},
+        {"category": "TICK-1002", "start": 8, "end": 14, "name": "Awaiting Response", "color": "#9b59b6"},
+        {"category": "TICK-1002", "start": 14, "end": 18, "name": "Resolved", "color": "#2ecc71"},
+
+        {"category": "TICK-1003", "start": 2, "end": 5, "name": "Open", "color": "#e74c3c"},
+        {"category": "TICK-1003", "start": 5, "end": 20, "name": "In Progress", "color": "#f39c12"}
+    ]
+)
+```
+
+#### SLA Tracking
+```
+generate_timeline_chart(
+    title="SLA Compliance - Response Times",
+    categories=["VIP Customer A", "VIP Customer B", "VIP Customer C"],
+    events=[
+        {"category": "VIP Customer A", "start": 0, "end": 1, "name": "Initial Response", "color": "#2ecc71"},
+        {"category": "VIP Customer A", "start": 1, "end": 4, "name": "Resolution", "color": "#2ecc71"},
+
+        {"category": "VIP Customer B", "start": 0, "end": 3, "name": "Initial Response", "color": "#f39c12"},
+        {"category": "VIP Customer B", "start": 3, "end": 8, "name": "Resolution", "color": "#f39c12"},
+
+        {"category": "VIP Customer C", "start": 0, "end": 5, "name": "Initial Response", "color": "#e74c3c"},
+        {"category": "VIP Customer C", "start": 5, "end": 15, "name": "Resolution", "color": "#e74c3c"}
+    ]
+)
+```
+
+---
+
+## 4. Sentiment Gauge Grid (`generate_sentiment_gauge_grid`)
+
+### Best For:
+- Sentiment scores by product
+- NPS by customer segment
+- Satisfaction ratings by team
+- Quality scores by category
+- CSAT dashboard
+
+### Parameters:
+- `title` - Chart title
+- `gauges` - List of `{"name": "Item", "value": score, "max": 100}`
+
+### Use Cases:
+
+#### Product Sentiment Dashboard
+```
+User: "Show customer satisfaction scores for all products"
+
+Gemini calls:
+generate_sentiment_gauge_grid(
+    title="Customer Satisfaction by Product",
+    gauges=[
+        {"name": "Product A", "value": 87},
+        {"name": "Product B", "value": 72},
+        {"name": "Product C", "value": 91},
+        {"name": "Product D", "value": 68},
+        {"name": "Product E", "value": 85},
+        {"name": "Product F", "value": 79}
+    ]
+)
+```
+
+#### NPS by Segment
+```
+generate_sentiment_gauge_grid(
+    title="Net Promoter Score by Customer Segment",
+    gauges=[
+        {"name": "Enterprise", "value": 65},
+        {"name": "SMB", "value": 78},
+        {"name": "Startup", "value": 82},
+        {"name": "Individual", "value": 71}
+    ]
+)
+```
+
+#### Support Team Performance
+```
+generate_sentiment_gauge_grid(
+    title="Team CSAT Scores - Q4 2024",
+    gauges=[
+        {"name": "Team Alpha", "value": 92},
+        {"name": "Team Beta", "value": 88},
+        {"name": "Team Gamma", "value": 85},
+        {"name": "Team Delta", "value": 90}
+    ]
+)
+```
+
+---
+
+## 5. Trend Comparison Chart (`generate_trend_comparison_chart`)
+
+### Best For:
+- Period-over-period sentiment
+- Ticket volume trends
+- Response time improvements
+- Resolution rate tracking
+- Customer satisfaction trends
+
+### Parameters:
+- `title` - Chart title
+- `time_periods` - Time labels
+- `current_period` - Current values
+- `previous_period` - Comparison values
+- `metric_name` - What's being measured
+
+### Use Cases:
+
+#### Satisfaction Trend
+```
+User: "Compare customer satisfaction this month vs last month"
+
+Gemini calls:
+generate_trend_comparison_chart(
+    title="Customer Satisfaction Trend - Month over Month",
+    time_periods=["Week 1", "Week 2", "Week 3", "Week 4"],
+    current_period=[78, 82, 85, 88],
+    previous_period=[75, 77, 79, 81],
+    metric_name="CSAT Score",
+    show_percentage_change=True
+)
+```
+
+#### Ticket Volume
+```
+generate_trend_comparison_chart(
+    title="Support Ticket Volume - YoY Comparison",
+    time_periods=["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+    current_period=[450, 520, 480, 510, 490, 530],
+    previous_period=[380, 420, 410, 440, 430, 460],
+    metric_name="Number of Tickets"
+)
+```
+
+#### Response Time Improvement
+```
+generate_trend_comparison_chart(
+    title="Average Response Time - Quarter over Quarter",
+    time_periods=["Month 1", "Month 2", "Month 3"],
+    current_period=[4.2, 3.8, 3.2],
+    previous_period=[5.5, 5.2, 4.8],
+    metric_name="Response Time (hours)"
+)
+```
+
+---
+
+## Complete Customer Support Analytics Dashboard
+
+### Combining Charts for Full Analysis
+
+#### Dashboard Example: Monthly Support Review
+```
+1. Word Cloud: "Top Customer Issues This Month"
+2. Stacked Bar: "Ticket Status by Priority"
+3. Sentiment Gauge Grid: "CSAT by Product Line"
+4. Trend Comparison: "Ticket Volume vs Last Month"
+5. Timeline: "Critical Incident Resolution Timeline"
+```
+
+---
+
+## Common Analysis Patterns
+
+### 1. Support Ticket Analysis
+**Questions to Answer:**
+- What are customers complaining about?
+- Which priorities have most open tickets?
+- How long do tickets take to resolve?
+- Are response times improving?
+
+**Charts to Use:**
+- Word Cloud → Common issues
+- Stacked Bar → Status by priority
+- Timeline → Resolution duration
+- Trend Comparison → Volume trends
+
+### 2. Customer Sentiment Analysis
+**Questions to Answer:**
+- How satisfied are customers by product?
+- Is sentiment improving or declining?
+- Which products need attention?
+- What keywords indicate satisfaction/dissatisfaction?
+
+**Charts to Use:**
+- Sentiment Gauge Grid → Scores by product
+- Word Cloud → Positive/negative keywords
+- Trend Comparison → Sentiment over time
+- Stacked Bar → Sentiment distribution
+
+### 3. Performance Tracking
+**Questions to Answer:**
+- Are we meeting SLAs?
+- How do teams compare?
+- Are response times improving?
+- Which channels perform best?
+
+**Charts to Use:**
+- Timeline → SLA compliance
+- Sentiment Gauge Grid → Team scores
+- Trend Comparison → Response time trends
+- Stacked Bar → Performance by channel
+
+---
+
+## Example Prompts for Support Analysis
+
+### Feedback Analysis
+```
+"Show word cloud of customer feedback keywords from last quarter"
+"Create stacked bar chart of sentiment by product category"
+"Display satisfaction scores for each support team"
+```
+
+### Ticket Analysis
+```
+"Show timeline of how long our top 10 tickets took to resolve"
+"Create stacked bar showing ticket status by priority level"
+"Compare ticket volume this month vs last month"
+```
+
+### Trend Analysis
+```
+"Show customer satisfaction trend compared to last quarter"
+"Display response time improvements over the past 6 months"
+"Compare NPS scores across customer segments"
+```
+
+### Performance Dashboards
+```
+"Create gauge grid showing CSAT for all products"
+"Show word cloud of most common support topics"
+"Display ticket resolution timeline for critical issues"
+```
+
+---
+
+## Integration with Other Charts
+
+### Combine for Comprehensive Analysis:
+
+**Customer Feedback Deep Dive:**
+1. Word Cloud → What are they saying?
+2. Sentiment Gauge Grid → Overall scores
+3. Stacked Bar → Sentiment breakdown by category
+4. Trend Comparison → Is it improving?
+
+**Support Operations Review:**
+1. Stacked Bar → Current ticket status
+2. Timeline → Resolution speed
+3. Trend Comparison → Volume changes
+4. Funnel → Ticket resolution funnel
+
+**Product Performance Analysis:**
+1. Sentiment Gauge Grid → Satisfaction by product
+2. Word Cloud → Common feedback themes
+3. Radar → Multi-factor product comparison
+4. Heatmap → Issues by product and time
+
+---
+
+## Tips for Customer Support Analytics
+
+### Word Cloud Best Practices:
+- Filter out common words (the, and, is, etc.)
+- Combine synonyms (great/excellent/awesome)
+- Separate positive/negative keywords
+- Focus on actionable terms
+
+### Stacked Bar Tips:
+- Use red/orange/green for status (open/progress/resolved)
+- Order by volume or priority
+- Include percentages for easy comparison
+- Horizontal layout works better for many categories
+
+### Timeline Best Practices:
+- Use consistent color coding (red=open, green=resolved)
+- Show only top N items (5-10)
+- Include time units clearly (hours, days)
+- Mark SLA deadlines
+
+### Sentiment Gauge Guidelines:
+- Use consistent scale (0-100)
+- Color code: Green >80, Orange 60-80, Red <60
+- Group logically (by product, team, segment)
+- Update regularly for trends
+
+### Trend Comparison Tips:
+- Use same time periods for fair comparison
+- Show percentage change clearly
+- Mark significant events
+- Include confidence intervals if available
+
+---
+
+## Total Chart Types Available: **22!**
+
+**Basic (5):** Line, Bar, Pie, Scatter, Multi-Series
+**Intermediate (6):** Area, Gauge, Radar, Heatmap, Funnel, Box Plot
+**Advanced (6):** Sankey, Treemap, Sunburst, Candlestick, Parallel, Waterfall
+**Customer Support (5):** Word Cloud, Stacked Bar, Timeline, Sentiment Gauge Grid, Trend Comparison
+
+Your customer support analysis toolkit is now complete! 📊✨
